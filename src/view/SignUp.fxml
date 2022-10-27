@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #F4ECCD;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #F4ECCD;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SignUpController">
    <children>
-      <TextField fx:id="txtNombre2" layoutX="143.0" layoutY="138.0" prefHeight="42.0" prefWidth="299.0" promptText="Introduzca el nombre de usuario">
+      <TextField fx:id="txtNombre2" layoutX="143.0" layoutY="138.0" onKeyTyped="#keyEvent" prefHeight="42.0" prefWidth="299.0" promptText="Introduzca el nombre de usuario">
          <font>
             <Font size="14.0" />
          </font>
@@ -25,7 +25,7 @@
             <Font name="Bookman Old Style" size="40.0" />
          </font>
       </Label>
-      <TextField fx:id="txtNombreComp" layoutX="143.0" layoutY="213.0" prefHeight="42.0" prefWidth="299.0" promptText="Introduzca su nombre completo">
+      <TextField fx:id="txtNombreComp" layoutX="143.0" layoutY="213.0" onKeyTyped="#keyEvent" prefHeight="42.0" prefWidth="299.0" promptText="Introduzca su nombre completo">
          <font>
             <Font size="14.0" />
          </font>
@@ -35,7 +35,7 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="txtEmail" layoutX="143.0" layoutY="286.0" prefHeight="42.0" prefWidth="299.0" promptText="Introduzca su email">
+      <TextField fx:id="txtEmail" layoutX="143.0" layoutY="286.0" onKeyTyped="#keyEvent" prefHeight="42.0" prefWidth="299.0" promptText="Introduzca su email">
          <font>
             <Font size="14.0" />
          </font>
@@ -53,7 +53,7 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <PasswordField fx:id="txtPasswd2" layoutX="143.0" layoutY="360.0" prefHeight="42.0" prefWidth="299.0" promptText="Introduzca su contraseña">
+      <PasswordField fx:id="txtPasswd2" layoutX="143.0" layoutY="360.0" onKeyTyped="#keyEvent" prefHeight="42.0" prefWidth="299.0" promptText="Introduzca su contraseña">
          <font>
             <Font size="14.0" />
          </font>
@@ -66,7 +66,7 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <PasswordField fx:id="txtConfirmPasswd" layoutX="143.0" layoutY="434.0" prefHeight="42.0" prefWidth="299.0" promptText="Vuelva a introducir su contraseña">
+      <PasswordField fx:id="txtConfirmPasswd" layoutX="143.0" layoutY="434.0" onKeyTyped="#keyEvent" prefHeight="42.0" prefWidth="299.0" promptText="Vuelva a introducir su contraseña">
          <font>
             <Font size="14.0" />
          </font>
@@ -87,6 +87,11 @@
          </font>
       </Label>
       <Label layoutX="508.0" layoutY="286.0" prefHeight="42.0" prefWidth="208.0" text="FORMATO ERRONEO" textFill="#f21818" visible="false">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblError2" layoutX="508.0" layoutY="282.0" prefHeight="42.0" prefWidth="208.0" text="DATOS MAL INTRODUCIDOS" textFill="#f21818" visible="false">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
