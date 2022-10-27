@@ -21,7 +21,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
-
 /**
  *
  * @author Jessica
@@ -37,7 +36,7 @@ public class SignUpController implements Initializable {
 
     //FORMATO CORRECTO PASSWORD
     @FXML
-    private static final String PASSWORD_REGEX ="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{3,15}$";
+    private static final String PASSWORD_REGEX = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{3,15}$";
 
     @FXML
     private static final Pattern PASSWORD_PATTERN = Pattern.compile(PASSWORD_REGEX);
@@ -53,9 +52,9 @@ public class SignUpController implements Initializable {
 
     //FORMATO CORRECTO DEL EMAIL
     @FXML
-   // private static final String email = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$.{10,30}";
-    private static final String EMAIL_REGEX = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
-    
+     private static final String  EMAIL_REGEX ="^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
+    // private static final String  EMAIL_REGEX = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$.{10,30}";
+   // private static final String EMAIL_REGEX = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
 
     @FXML
     private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
@@ -83,8 +82,9 @@ public class SignUpController implements Initializable {
 
                 } else {
                     //Validad que el email tenga formato específico (xxxxx@gmail.com) y que no supere los 30 caracteres (ESPECIFICAMOS EL FORMATO ARRIBA).
-                    String recoger = this.txtEmail.toString();
-                    if (!(EMAIL_PATTERN.matcher(recoger).matches())) {
+                    String email = this.txtEmail.getText();
+                    
+                    if (!(EMAIL_PATTERN.matcher(email).matches())) {
                         lblError2.setVisible(true);
                         lblError2.setText("EMAIL \n INCORRECTOS");
 
@@ -97,30 +97,30 @@ public class SignUpController implements Initializable {
 
                         } else {
                             //Si los campos de password y confirmPassword no coinciden, saldrá un label de error (lblError2) y limpia esos campos.
-                            if (txtPasswd2 != txtConfirmPasswd) {
+                            if (txtPasswd2 == txtConfirmPasswd) {
                                 lblError2.setVisible(true);
-                                lblError2.setText("PASSWORD CORRECTAS");
-                            }else{
-                             lblError2.setVisible(true);
-                                lblError2.setText("LAS PASSWORD \n NO COINCIDEN");   
-                         }
-                       
+                                lblError2.setText("PASSWORD COINCIDEN");
+                            } else {
+                                lblError2.setVisible(true);
+                                lblError2.setText("LAS PASSWORD \n NO COINCIDEN");
+                            }
+
+                        }
+
                     }
 
+                    //Seguido, saldrá del método del botón.
                 }
-
-                //Seguido, saldrá del método del botón.
             }
-        } catch (Exception e) {
 
+        } catch (Exception e) {
         }
+
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
-    
-   
 
 }

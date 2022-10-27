@@ -25,7 +25,7 @@ public class Reto1_G3_Client extends Application {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         
-        stage.setTitle("SIGN IN");
+        stage.setTitle("SIGN UP");
         stage.show();
     }
 
