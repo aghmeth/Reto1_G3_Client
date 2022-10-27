@@ -8,47 +8,53 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="Avatar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #F4ECCD;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <TextField fx:id="txtNombre" layoutX="123.0" layoutY="223.0" prefHeight="42.0" prefWidth="299.0" promptText="Introduzca el nombre de usuario">
-         <font>
-            <Font size="14.0" />
-         </font>
-         <tooltip>
-            <Tooltip text="Máximo caracteres: 15." />
-         </tooltip></TextField>
-      <Button fx:id="btnLogin" layoutX="155.0" layoutY="440.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="149.0" text="LOGIN">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font></Button>
-      <Label fx:id="lblNombre" layoutX="123.0" layoutY="195.0" prefHeight="28.0" prefWidth="169.0" text="NOMBRE DE USUARIO">
-         <font>
-            <Font name="System Bold" size="16.0" />
-         </font></Label>
-      <Label fx:id="lblSignIb" layoutX="316.0" layoutY="92.0" prefHeight="58.0" prefWidth="169.0" text="SIGN IN" textAlignment="JUSTIFY">
-         <font>
-            <Font name="Bookman Old Style" size="40.0" />
-         </font>
-      </Label>
-      <Label fx:id="lblPasswd" layoutX="123.0" layoutY="300.0" prefHeight="28.0" prefWidth="106.0" text="PASSWORD">
-         <font>
-            <Font name="System Bold" size="16.0" />
-         </font></Label>
-      <PasswordField fx:id="txtPasswd" layoutX="123.0" layoutY="328.0" prefHeight="42.0" prefWidth="299.0" promptText="Introduzca su contraseña">
-         <font>
-            <Font size="14.0" />
-         </font>
-         <tooltip>
-            <Tooltip text="El password tiene que tener 15 caracteres &#10;como máximo, debe de tener mayusculas y minusculas y números." />
-         </tooltip></PasswordField>
-      <Button fx:id="btnSignUp" layoutX="485.0" layoutY="440.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="149.0" text="SIGN UP">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font></Button>
-      <Label fx:id="lblError" layoutX="498.0" layoutY="272.0" prefHeight="42.0" prefWidth="208.0" text="DATOS MAL INTRODUCIDOS" textFill="#f21818" visible="false">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-   </children>
+<Pane fx:id="Avatar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #F4ECCD;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SignInController">
+    <children>
+        <TextField fx:id="txtNombre" layoutX="123.0" layoutY="223.0" prefHeight="42.0" prefWidth="299.0" promptText="Introduzca el nombre de usuario">
+            <font>
+                <Font size="14.0" />
+            </font>
+            <tooltip>
+                <Tooltip text="Máximo caracteres: 15." />
+            </tooltip>
+        </TextField>
+        <Button fx:id="btnLogin" layoutX="155.0" layoutY="440.0" mnemonicParsing="false" onAction="#handleLoginAction" prefHeight="48.0" prefWidth="149.0" text="LOGIN">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+        </Button>
+        <Label fx:id="lblNombre" layoutX="123.0" layoutY="195.0" prefHeight="28.0" prefWidth="208.0" text="NOMBRE DE USUARIO">
+            <font>
+                <Font name="System Bold" size="16.0" />
+            </font>
+        </Label>
+        <Label fx:id="lblSignIb" layoutX="316.0" layoutY="92.0" prefHeight="58.0" prefWidth="169.0" text="SIGN IN" textAlignment="JUSTIFY">
+            <font>
+                <Font name="Bookman Old Style" size="40.0" />
+            </font>
+        </Label>
+        <Label fx:id="lblPasswd" layoutX="123.0" layoutY="300.0" prefHeight="28.0" prefWidth="106.0" text="PASSWORD">
+            <font>
+                <Font name="System Bold" size="16.0" />
+            </font>
+        </Label>
+        <PasswordField fx:id="txtPasswd" layoutX="123.0" layoutY="328.0" prefHeight="42.0" prefWidth="299.0" promptText="Introduzca su contraseña">
+            <font>
+                <Font size="14.0" />
+            </font>
+            <tooltip>
+                <Tooltip text="El password tiene que tener 15 caracteres &#10;como máximo, debe de tener mayusculas y minusculas y números." />
+            </tooltip>
+        </PasswordField>
+        <Button fx:id="btnSignUp" layoutX="485.0" layoutY="440.0" mnemonicParsing="false" onAction="#handleSignUpAction" prefHeight="48.0" prefWidth="149.0" text="SIGN UP">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+        </Button>
+        <Label fx:id="lblError" layoutX="498.0" layoutY="272.0" prefHeight="42.0" prefWidth="208.0" text="DATOS MAL INTRODUCIDOS" textFill="#f21818" visible="false">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Label>
+    </children>
 </Pane>
