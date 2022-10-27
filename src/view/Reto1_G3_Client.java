@@ -13,17 +13,19 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author 2dam
+ * @author Jessica
  */
 public class Reto1_G3_Client extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
+       
         Parent root = FXMLLoader.load(getClass().getResource("SignUp.fxml"));
         
         Scene scene = new Scene(root);
-        
         stage.setScene(scene);
+        
+        stage.setTitle("SIGN IN");
         stage.show();
     }
 
