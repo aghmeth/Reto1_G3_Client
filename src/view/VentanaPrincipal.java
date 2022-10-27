@@ -13,17 +13,19 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author 2dam
+ * @author Diego
  */
-public class Reto1_G3_Client extends Application {
+public class VentanaPrincipal extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("SignIn.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Principal.fxml"));
         
         Scene scene = new Scene(root);
-        
         stage.setScene(scene);
+        //La ventana no será redimensionable
+        stage.setResizable(false);
+        stage.setTitle("Principal");
         stage.show();
     }
 

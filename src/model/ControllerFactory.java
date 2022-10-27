@@ -10,5 +10,21 @@ package model;
  * @author 2dam
  */
 public class ControllerFactory {
+     private boolean WindowSignUp;
+    private boolean WindowSignIn;
+    /*FXMLDocumentController controller = null;
     
+    public FXMLDocumentController getControllerSignUP(){
+        if(WindowSignUp == true){
+            //controller = new FXMLDocumentControllerSignUP();
+        }
+        return controller;
+        
+    }
+     public FXMLDocumentController getControllerSignIN(){
+        if(WindowSignIn == true){
+            //controller = new FXMLDocumentControllerSignIN();
+        }
+        return controller;
+    }*/
 }
