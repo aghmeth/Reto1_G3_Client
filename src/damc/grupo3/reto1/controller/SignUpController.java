@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package damc.grupo3.reto1.controller;
 
+import java.util.logging.Logger;
 import java.awt.event.KeyEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -14,18 +15,22 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 /**
  *
  * @author Jessica
  */
-public class SignUpController implements Initializable {
+public class SignUpController  {
 
     //Declaramos los campos que utilizaremos en esta ventana
     @FXML
@@ -48,20 +53,67 @@ public class SignUpController implements Initializable {
     private Button btnSave, btnCancel;
 
     @FXML
-    private Label lblError2;
-
+    private Label lblError2, lblNombre2, lblNombreComp, lblEmail, lblPasswd2, lblConfirmPasswd;
     //FORMATO CORRECTO DEL EMAIL
     @FXML
-     private static final String  EMAIL_REGEX ="^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
+    private static final String EMAIL_REGEX = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
     // private static final String  EMAIL_REGEX = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$.{10,30}";
-   // private static final String EMAIL_REGEX = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
+    // private static final String EMAIL_REGEX = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
 
     @FXML
     private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
 
     @FXML
+    protected static final Logger LOGGER = Logger.getLogger("SignUpController");
+
+    @FXML
+    public void initStage(Parent root) {
+        LOGGER.info("Initializing Sign Up stage.");
+        Scene scene = new Scene(root);
+
+        //Los TextField nombre de usuario (txtNombre2), fullname  (txtNombreComp), email  (txtEmail), 
+        //password (txtPasswd2), ConfirmPassword (txtConfirmPasswd) están habilitados
+        txtNombre2.setDisable(false);
+        txtNombreComp.setDisable(false);
+        txtEmail.setDisable(false);
+        txtPasswd2.setDisable(false);
+        txtConfirmPasswd.setDisable(false);
+
+        //El botón save está habilitado.
+        btnSave.setDisable(false);
+        btnSave.setOnAction(this::handleButtonSaveAction);
+
+        //El botón cancel está habilitado. 
+        btnCancel.setDisable(false);
+        btnCancel.setOnAction(this::handleButtonCancel);
+
+        //Los label de nombre de usuario, fullname, email,  password y confirmPasswd estan visibles.
+        lblNombre2.setVisible(true);
+        lblNombreComp.setVisible(true);
+        lblEmail.setVisible(true);
+        lblPasswd2.setVisible(true);
+        lblConfirmPasswd.setVisible(true);
+
+        //La ventana no es redimensionable.
+        Stage stage = new Stage();
+        stage.setResizable(false);
+
+        //La ventana es una ventana modal.
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(scene);
+
+        //El foco inicialmente estará en el campo de nombre de usuario.
+        txtNombre2.requestFocus();
+
+        //El título de la ventana es “Sign Up”.
+        stage.setTitle("SIGN UP");
+
+        stage.show();
+    }
+
+    @FXML
     //VALIDAR QUE TODO ESTE CORRECTO Y CUMPLA LOS REQUISITOS
-    private void handleButtonAction(ActionEvent event) {
+    private void handleButtonSaveAction(ActionEvent event) {
 
         //Validar que los campos nombre de usuario, fullname, email, password y confirmPasswd estén informados.
         try {
@@ -81,9 +133,9 @@ public class SignUpController implements Initializable {
                     lblError2.setText("NUMERO CARACTERES \n INCORRECTOS");
 
                 } else {
-                    //Validad que el email tenga formato específico (xxxxx@gmail.com) y que no supere los 30 caracteres (ESPECIFICAMOS EL FORMATO ARRIBA).
+                    //Validar que el email tenga formato específico (xxxxx@gmail.com) y que no supere los 30 caracteres (ESPECIFICAMOS EL FORMATO ARRIBA).
                     String email = this.txtEmail.getText();
-                    
+
                     if (!(EMAIL_PATTERN.matcher(email).matches())) {
                         lblError2.setVisible(true);
                         lblError2.setText("EMAIL \n INCORRECTOS");
@@ -114,13 +166,23 @@ public class SignUpController implements Initializable {
             }
 
         } catch (Exception e) {
+             new Exception("Error en las validaciones " + e.getMessage());
         }
 
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+    //Nos redirige a la ventana de login nuevamente y se cierra la ventana actual, sin guardar los datos.
+    @FXML
+    private void handleButtonCancel(ActionEvent event) {
+        try {
+            Stage stage = (Stage) this.btnCancel.getScene().getWindow();
+            stage.close();
+        } catch (Exception e) {
+            new Exception("Error al cerrar la pestaña " + e.getMessage());
+        }
+
     }
+
+  
 
 }
