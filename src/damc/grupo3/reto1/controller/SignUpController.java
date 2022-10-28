@@ -30,7 +30,7 @@ import javafx.stage.Stage;
  *
  * @author Jessica
  */
-public class SignUpController  {
+public class SignUpController {
 
     //Declaramos los campos que utilizaremos en esta ventana
     @FXML
@@ -117,56 +117,41 @@ public class SignUpController  {
 
         //Validar que los campos nombre de usuario, fullname, email, password y confirmPasswd estén informados.
         try {
+            //Si no están informados alguno de los campos saldrá un label de error (lblError2).
             if (this.txtNombre2.getText().isEmpty() || this.txtNombreComp.getText().isEmpty()
                     || this.txtEmail.getText().isEmpty() || this.txtPasswd2.getText().isEmpty()
                     || this.txtConfirmPasswd.getText().isEmpty()) {
-                //Si no están informados alguno de los campos saldrá un label de error (lblError2).
-                lblError2.setVisible(true);
-                lblError2.setText("CAMPOS NO INFORMADOS");
-
-            } else {
-
-                //Validar que el máximo número de caracteres en el campo de nombre de usuario, fullname, password y confirmPassword sea de 15.     
-                if (this.txtNombre2.getText().length() > 15 || this.txtNombreComp.getText().length() > 15 || this.txtPasswd2.getText().length() > 15
-                        || this.txtConfirmPasswd.getText().length() > 15) {
-                    lblError2.setVisible(true);
-                    lblError2.setText("NUMERO CARACTERES \n INCORRECTOS");
-
-                } else {
-                    //Validar que el email tenga formato específico (xxxxx@gmail.com) y que no supere los 30 caracteres (ESPECIFICAMOS EL FORMATO ARRIBA).
-                    String email = this.txtEmail.getText();
-
-                    if (!(EMAIL_PATTERN.matcher(email).matches())) {
-                        lblError2.setVisible(true);
-                        lblError2.setText("EMAIL \n INCORRECTOS");
-
-                    } else {
-                        //Validar que la password tenga formato especifico
-                        String password = this.txtPasswd2.getText();
-                        if (!(PASSWORD_PATTERN.matcher(password).matches())) {
-                            lblError2.setVisible(true);
-                            lblError2.setText("CONTRASEÑA NO VALIDA");
-
-                        } else {
-                            //Si los campos de password y confirmPassword no coinciden, saldrá un label de error (lblError2) y limpia esos campos.
-                            if (txtPasswd2 == txtConfirmPasswd) {
-                                lblError2.setVisible(true);
-                                lblError2.setText("PASSWORD COINCIDEN");
-                            } else {
-                                lblError2.setVisible(true);
-                                lblError2.setText("LAS PASSWORD \n NO COINCIDEN");
-                            }
-
-                        }
-
-                    }
-
-                    //Seguido, saldrá del método del botón.
-                }
+                throw new Exception("CAMPOS NO INFORMADOS");
             }
 
+            //Validar que el máximo número de caracteres en el campo de nombre de usuario, fullname, password y confirmPassword sea de 15.     
+            if (this.txtNombre2.getText().length() > 15 || this.txtNombreComp.getText().length() > 15 || this.txtPasswd2.getText().length() > 15
+                    || this.txtConfirmPasswd.getText().length() > 15) {
+                throw new Exception("NUMERO CARACTERES \n INCORRECTOS");
+            }
+
+            //Validar que el email tenga formato específico (xxxxx@gmail.com) y que no supere los 30 caracteres (ESPECIFICAMOS EL FORMATO ARRIBA).
+            String email = this.txtEmail.getText();
+
+            if (!(EMAIL_PATTERN.matcher(email).matches())) {
+                throw new Exception("EMAIL \n INCORRECTOS");
+            }
+
+            //Validar que la password tenga formato especifico
+            String password = this.txtPasswd2.getText();
+            if (!(PASSWORD_PATTERN.matcher(password).matches())) {
+                throw new Exception("CONTRASEÑA NO VALIDA");
+            }
+
+            //Si los campos de password y confirmPassword no coinciden, saldrá un label de error (lblError2) y limpia esos campos.
+            if (txtPasswd2 == txtConfirmPasswd) {
+                throw new Exception("LAS PASSWORD \n NO COINCIDEN");
+            }
+
+            //Seguido, saldrá del método del botón.
         } catch (Exception e) {
-             new Exception("Error en las validaciones " + e.getMessage());
+            lblError2.setVisible(true);
+            lblError2.setText(e.getMessage());
         }
 
     }
@@ -182,7 +167,5 @@ public class SignUpController  {
         }
 
     }
-
-  
 
 }
