@@ -5,10 +5,19 @@
  */
 package exceptions;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
- *
- * @author 2dam
+ *This exception shows a message wich says the password wich corresponds to the user in the Sign In view is incorrect
+ * @author Alejandro
  */
 public class SignInIncorrectPassword {
-    
+    public SignInIncorrectPassword() {
+        try {
+            throw new Exception ("The password is incorrect");
+        } catch (Exception ex) {
+            Logger.getLogger(SignInIncorrectPassword.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

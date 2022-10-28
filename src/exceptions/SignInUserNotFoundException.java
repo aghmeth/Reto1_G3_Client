@@ -9,15 +9,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *This exception show a message wich says an error ocurred trying to connect with the server
+ *This is a exception wich shows a message to advertise us that user Introduced in the SignIn view was not found
  * @author Alejandro
  */
-public class ServerConnectionException extends Exception{
-    public ServerConnectionException() {
+public class SignInUserNotFoundException {
+    public SignInUserNotFoundException() {
         try {
-            throw new Exception ("Error trying to connect with the server");
+            throw new Exception ("The user was not found");
         } catch (Exception ex) {
-            Logger.getLogger(ServerConnectionException.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SignInUserNotFoundException.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

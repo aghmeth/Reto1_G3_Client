@@ -5,10 +5,19 @@
  */
 package exceptions;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
- *
- * @author 2dam
+ *This exception is used to show a message if the passwords checked in the Sign Up view are incorrect
+ * @author Alejandro
  */
 public class SignUpIncorrectPassword {
-    
+    public SignUpIncorrectPassword() {
+        try {
+            throw new Exception ("The password is incorrect");
+        } catch (Exception ex) {
+            Logger.getLogger(SignUpIncorrectPassword.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
