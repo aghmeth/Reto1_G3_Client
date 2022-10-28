@@ -3,9 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view;
+package damc.grupo3.reto1;
 
+
+
+import damc.grupo3.reto1.controller.SignInController;
 import javafx.application.Application;
+import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -15,19 +19,17 @@ import javafx.stage.Stage;
  *
  * @author 2dam
  */
-public class Reto1_G3_Client extends Application {
+public class Aplication extends Application{
     
-    @Override
+   
     public void start(Stage stage) throws Exception {
         
-        Parent root = FXMLLoader.load(getClass().getResource("SignIn.fxml"));
+        FXMLLoader loader= new FXMLLoader(getClass().getResource("view/SignIn.fxml")); 
+        Parent root = (Parent)loader.load();
+        SignInController signIn= ((SignInController)loader.getController());
+        signIn.setStage(stage);
+        signIn.initStage(root);
         
-        Scene scene = new Scene(root);
-        
-        stage.setScene(scene);
-        
-        stage.setTitle("SIGN IN");
-        stage.show();
     }
 
     /**
