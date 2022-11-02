@@ -151,8 +151,8 @@ public class SignInController{
 
             Parent root = loader.load();
 
-            //  SignUpController signUpController = loader.getController();
-            //  signUpController.initStage();
+             SignUpController signUpController = loader.getController();
+             signUpController.initStage(root);
         } catch (IOException ex) {
             Logger.getLogger(SignInController.class.getName()).log(Level.SEVERE, null, ex);
         }
