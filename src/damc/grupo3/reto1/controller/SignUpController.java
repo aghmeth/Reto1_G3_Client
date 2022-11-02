@@ -28,7 +28,7 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author Jessica
+ * @author Jessica y collaboradores Diego y Alejandro
  */
 public class SignUpController {
 
