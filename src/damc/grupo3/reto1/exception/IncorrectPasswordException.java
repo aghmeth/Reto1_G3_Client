@@ -5,10 +5,20 @@
  */
 package damc.grupo3.reto1.exception;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * Password mal introducida
  * @author 2dam
  */
-public class IncorrectPasswordException {
+public class IncorrectPasswordException extends Exception {
+
+         private static final long serialVersionUID = 1L;
     
+    public IncorrectPasswordException (String message){
+        super(message);
+           
+    } 
+           
 }
