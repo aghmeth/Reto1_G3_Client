@@ -5,7 +5,6 @@
  */
 package damc.grupo3.reto1.controller;
 
-
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,7 +25,7 @@ import javafx.stage.Stage;
  *
  * @author Josu ,Jessica
  */
-public class SignInController  {
+public class SignInController{
 
     @FXML
     private Stage stage;
@@ -58,9 +57,9 @@ public class SignInController  {
 
     @FXML
     private static final Pattern PASSWORD_PATTERN = Pattern.compile(PASSWORD_REGEX);
-    
+
     @FXML
-    protected static final Logger LOGGER=Logger.getLogger("/controller/SignInController");
+    protected static final Logger LOGGER = Logger.getLogger("/controller/SignInController");
 
     public void initStage(Parent root) {
 
@@ -83,64 +82,62 @@ public class SignInController  {
 
         //El foco estará puesto en el campo de nombre de usuario (txtNombre).
         txtNombre.requestFocus();
-        
+
         //El título de la ventana es “Sign In”.
         stage.setTitle("SIGN IN");
 
         //La ventana no es redimensionable
         stage.setResizable(false);
-        
+
         stage.show();
     }
-    public void setStage(Stage stage){
-        this.stage=stage;
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 
     @FXML
-    private void handleLoginAction(ActionEvent event) {
+    private void handleLoginAction(ActionEvent event) throws Exception {
 
         try {
             // Validar que los TextField nombre de usuario y password estén informados.
             //Si no está informado alguno de los dos campos, saldrá un label de error (lblError). Seguido, saldrá del método del botón.
             if (this.txtNombre.getText().isEmpty() || this.txtPasswd.getText().isEmpty()) {
-                lblError.setVisible(true);
-                lblError.setText("CAMPOS NO INFORMADOS");
-            } else {
-                //Validar que el máximo número de caracteres en el campo de nombre de usuario y password sea de 15
-                if (this.txtNombre.getText().length() > 15 || this.txtPasswd.getText().length() > 15) {
-                    lblError.setVisible(true);
-                    lblError.setText("NUMERO CARACTERES \n INCORRECTOS");
-                } else {
-                    String password = this.txtPasswd.getText();
-                    if (PASSWORD_PATTERN.matcher(password).matches()) {
 
-                        // Una vez que los campos de nombre de usuario y password
-                        //son válidos. Se llama al método getExecuteSignIn de la interfaz 
-                        //(Sign) pasándole un objeto (User), con los valores del nombre de usuario 
-                        //y la password: 
-                        //            User user = Sign
-                        //cargar el fxml de la ventana de sign up utilizando un cargador no estatico 
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Principal.fxml"));
+                throw new Exception("CANPOS NO INFORMADOS ");
+            }
+            //Validar que el máximo número de caracteres en el campo de nombre de usuario y password sea de 15
+            if (this.txtNombre.getText().length() > 15 || this.txtPasswd.getText().length() > 15) {
 
-                        Parent root = loader.load();
+                throw new Exception("NUMERO CARACTERES \n INCORRECTOS");
+            }
+            String password = this.txtPasswd.getText();
+            if (!(PASSWORD_PATTERN.matcher(password).matches())) {
 
-                        PrincipalController principal = loader.getController();
-
-                        //              principal.setUser(user);
-                        //              principal.initialize(location, resources);
-                    } else {
-
-                        lblError.setVisible(true);
-                        lblError.setText("CONTRASEÑA NO VALIDA");
-
-                    }
-
-                }
+                // Una vez que los campos de nombre de usuario y password
+                //son válidos. Se llama al método getExecuteSignIn de la interfaz 
+                //(Sign) pasándole un objeto (User), con los valores del nombre de usuario 
+                //y la password: 
+                // User user = Sign
+                //cargar el fxml de la ventana de sign up utilizando un cargador no estatico 
+//                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Principal.fxml"));
+//
+//                Parent root = loader.load();
+//
+//                PrincipalController principal = loader.getController();
+//
+//                principal.setUser(User);
+//                principal.initialize(location, resources);
+//                throw new Exception("CONTRASEÑA NO VALIDA");
+//           
+                throw new Exception("Contraseña incorrecta");
             }
 
         } catch (Exception e) {
 
-            new Alert(Alert.AlertType.ERROR, "Los campos usuario y contraseña \n deben estar rellenos ", ButtonType.OK).showAndWait();
+            lblError.setVisible(true);
+            lblError.setText(e.getMessage());
+
         }
 
     }
@@ -154,15 +151,12 @@ public class SignInController  {
 
             Parent root = loader.load();
 
-            SignUpController signUpController = loader.getController();
-            signUpController.initStage();
-            
+            //  SignUpController signUpController = loader.getController();
+            //  signUpController.initStage();
         } catch (IOException ex) {
             Logger.getLogger(SignInController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
-
-   
 
 }

@@ -37,7 +37,7 @@ public class PrincipalController implements Initializable {
     private Button btnExit;
 
     @FXML
-    private void handleExitButtonAction(ActionEvent event) {
+    private void handleExitButtonAction(ActionEvent event ) {
         try {
 
             //El campo de texto está deshabilitado
@@ -84,7 +84,7 @@ public class PrincipalController implements Initializable {
             stage.setScene(scene);
             stage.show();
             
-            Stage myStage = (Stage) this.btnExit.getScene().getWindow();
+           
         } catch (IOException ex) {
             Logger.getLogger(PrincipalController.class.getName()).log(Level.SEVERE, null, ex);
         }
