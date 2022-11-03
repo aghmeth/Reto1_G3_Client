@@ -9,7 +9,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
- *
+ * This is the Application class for the client side.
  * @author 2dam
  */
 public class Aplication extends Application{
