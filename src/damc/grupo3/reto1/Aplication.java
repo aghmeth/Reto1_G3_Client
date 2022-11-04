@@ -3,9 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view;
+package damc.grupo3.reto1;
 
+
+import damc.grupo3.reto1.controller.PrincipalController;
 import javafx.application.Application;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -13,20 +16,17 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author Diego
+ * @author Jessica
  */
-public class VentanaPrincipal extends Application {
-    
-    @Override
+public class Aplication extends Application{
+
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("Principal.fxml"));
-        
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        //La ventana no será redimensionable
-        stage.setResizable(false);
-        stage.setTitle("Principal");
-        stage.show();
+       
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("view/Principal.fxml"));
+       
+        Parent root = (Parent)loader.load();
+        PrincipalController principal = ((PrincipalController)loader.getController());
+        //principal.initialize(url, rb);
     }
 
     /**
@@ -35,5 +35,5 @@ public class VentanaPrincipal extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }
