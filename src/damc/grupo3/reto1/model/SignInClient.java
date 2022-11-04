@@ -32,13 +32,13 @@ import static jdk.nashorn.internal.objects.NativeMath.log;
 
 /**
  *
- * @author 2dam
+ * @author Ale y Diego
  */
-public class SignerClient implements Sign{
+public class SignInClient implements Sign{
     static final String HOST = "localhost";
     static final int PUERTO = 5000;    
     MessageType mt;
-    public SignerClient() {
+    public SignInClient() {
         
     }
 
@@ -57,23 +57,27 @@ public class SignerClient implements Sign{
             
             ois = new ObjectInputStream(skCliente.getInputStream());
             Message m2 = (Message) ois.readObject();
-            
-            if(mt == OK_RESPONSE) {
-                log(Level.SEVERE, "El usuario se ha logeado correctamente");
-            }else if(mt == USER_ALREADY_EXISTS_RESPONSE) {
-               throw new UserAlreadyExitsException("The user already exists");
-            }else if(mt == ERROR_RESPONSE) {
-                throw new ServerErrorException("An error in the server has ocurred");
-            }
+
+            if(null != mt) switch (mt) {
+               case OK_RESPONSE:
+                   log(Level.SEVERE, "The user has been logged correctly");
+                   break;
+               case USER_ALREADY_EXISTS_RESPONSE:
+                   throw new UserAlreadyExitsException("The user already exists");
+               case ERROR_RESPONSE:
+                   throw new ServerErrorException("An error in the server has ocurred");
+               default:
+                   break;
+           }
             
         } catch (IOException ex) {
-            Logger.getLogger(SignerClient.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SignInClient.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(SignerClient.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SignInClient.class.getName()).log(Level.SEVERE, null, ex);
         } catch (UserAlreadyExitsException ex) {
-            Logger.getLogger(SignerClient.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SignInClient.class.getName()).log(Level.SEVERE, null, ex);
         }catch (ServerErrorException ex) {
-            Logger.getLogger(SignerClient.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SignInClient.class.getName()).log(Level.SEVERE, null, ex);
         }
         return user;
     }
@@ -104,15 +108,15 @@ public class SignerClient implements Sign{
                 throw new PasswordErrorException("The password is incorrect");
             }
         } catch (IOException ex) {
-            Logger.getLogger(SignerClient.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SignInClient.class.getName()).log(Level.SEVERE, null, ex);
         } catch (UserNotFoundException ex) {
-            Logger.getLogger(SignerClient.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SignInClient.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ServerErrorException ex) {
-            Logger.getLogger(SignerClient.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SignInClient.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(SignerClient.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SignInClient.class.getName()).log(Level.SEVERE, null, ex);
         } catch (PasswordErrorException ex) {
-            Logger.getLogger(SignerClient.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SignInClient.class.getName()).log(Level.SEVERE, null, ex);
         }
         return user;   
     }
