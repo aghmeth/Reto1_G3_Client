@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package exceptions;
+package damc.grupo3.reto1.exception;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -12,12 +12,8 @@ import java.util.logging.Logger;
  *This is a exception wich shows a message to advertise us that user Introduced in the SignIn view was not found
  * @author Alejandro
  */
-public class SignInUserNotFoundException {
-    public SignInUserNotFoundException() {
-        try {
-            throw new Exception ("The user was not found");
-        } catch (Exception ex) {
-            Logger.getLogger(SignInUserNotFoundException.class.getName()).log(Level.SEVERE, null, ex);
-        }
+public class SignInUserNotFoundException extends Exception{
+    public SignInUserNotFoundException(String msg) {
+        super(msg);
     }
 }

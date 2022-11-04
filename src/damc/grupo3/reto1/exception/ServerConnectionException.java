@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package exceptions;
+package damc.grupo3.reto1.exception;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,11 +13,7 @@ import java.util.logging.Logger;
  * @author Alejandro
  */
 public class ServerConnectionException extends Exception{
-    public ServerConnectionException() {
-        try {
-            throw new Exception ("Error trying to connect with the server");
-        } catch (Exception ex) {
-            Logger.getLogger(ServerConnectionException.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public ServerConnectionException(String msg) {
+        super(msg);
     }
 }
