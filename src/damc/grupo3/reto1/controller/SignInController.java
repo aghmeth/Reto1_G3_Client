@@ -25,44 +25,44 @@ import javafx.stage.Stage;
  *
  * @author Josu ,Jessica
  */
-public class SignInController{
-
+public class SignInController {
+    
     @FXML
     private Stage stage;
-
+    
     @FXML
     private TextField txtNombre;
-
+    
     @FXML
     private TextField txtPasswd;
-
+    
     @FXML
     private Label lblError;
-
+    
     @FXML
     private Label lblNombre;
-
+    
     @FXML
     private Label lblPasswd;
-
+    
     @FXML
     private Button btnLogin;
-
+    
     @FXML
     private Button btnSignUp;
-
+    
     @FXML
     //con esta sentencia en orden le estamos diciendo que tiene que tener minimo un numero una letra minuscula una mayuscula y que no puede tener espacios en blanco
     private static final String PASSWORD_REGEX = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{3,15}$";
-
+    
     @FXML
     private static final Pattern PASSWORD_PATTERN = Pattern.compile(PASSWORD_REGEX);
-
+    
     @FXML
     protected static final Logger LOGGER = Logger.getLogger("/controller/SignInController");
-
+    
     public void initStage(Parent root) {
-
+        
         LOGGER.info("Initializing SignIn stage");
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -88,27 +88,27 @@ public class SignInController{
 
         //La ventana no es redimensionable
         stage.setResizable(false);
-
+        
         stage.show();
     }
-
+    
     public void setStage(Stage stage) {
         this.stage = stage;
     }
-
+    
     @FXML
     private void handleLoginAction(ActionEvent event) throws Exception {
-
+        
         try {
             // Validar que los TextField nombre de usuario y password estén informados.
             //Si no está informado alguno de los dos campos, saldrá un label de error (lblError). Seguido, saldrá del método del botón.
             if (this.txtNombre.getText().isEmpty() || this.txtPasswd.getText().isEmpty()) {
-
+                
                 throw new Exception("CANPOS NO INFORMADOS ");
             }
             //Validar que el máximo número de caracteres en el campo de nombre de usuario y password sea de 15
             if (this.txtNombre.getText().length() > 15 || this.txtPasswd.getText().length() > 15) {
-
+                
                 throw new Exception("NUMERO CARACTERES \n INCORRECTOS");
             }
             String password = this.txtPasswd.getText();
@@ -132,31 +132,33 @@ public class SignInController{
 //           
                 throw new Exception("Contraseña incorrecta");
             }
-
+            
         } catch (Exception e) {
-
+            
             lblError.setVisible(true);
             lblError.setText(e.getMessage());
-
+            
         }
-
+        
     }
-
+    
     @FXML
     private void handleSignUpAction(ActionEvent event) {
-
+        
         try {
+            Stage SignUpStage = new Stage();
             //cargar el fxml de la ventana de sign up utilizando un cargador no estatico
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("view/SignUp.fxml"));
-
-            Parent root = loader.load();
-
-             SignUpController signUpController = loader.getController();
-             signUpController.initStage(root);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/damc/grupo3/reto1/view/SignUp.fxml"));
+            
+            Parent root = (Parent) loader.load();
+            
+            SignUpController signUpController = ((SignUpController) loader.getController());
+            
+            signUpController.initStage(root);
         } catch (IOException ex) {
             Logger.getLogger(SignInController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
     }
-
+    
 }
