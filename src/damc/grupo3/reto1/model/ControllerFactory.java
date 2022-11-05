@@ -13,18 +13,18 @@ package damc.grupo3.reto1.model;
  */
 public class ControllerFactory{
     //Con este método creamos el método getSocket, el cual llama al SignInClient
-       private SignInClient getSocket(){
+       public SignInClient getSocket(){
            SignInClient skCliente;
            skCliente = new SignInClient();
            return skCliente;
     }
        /*
-       private SignInController getControllerSignIn(){
+       public SignInController getControllerSignIn(){
            SignInController signIn;
            signIn = new SignInController();
            return signIn;
        }
-       private SignUpController getControllerSignIn(){
+       public SignUpController getControllerSignIn(){
            SignUpController signUp;
            signUp= new SignInController();
            return signUp;

@@ -5,10 +5,7 @@
  */
 package damc.grupo3.reto1;
 
-
-import damc.grupo3.reto1.controller.PrincipalController;
 import javafx.application.Application;
-
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -16,17 +13,20 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author Jessica
+ * @author Diego
  */
-public class Aplication extends Application{
-
+public class Aplication extends Application {
+    
+    @Override
     public void start(Stage stage) throws Exception {
-       
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("view/Principal.fxml"));
-       
-        Parent root = (Parent)loader.load();
-        PrincipalController principal = ((PrincipalController)loader.getController());
-        //principal.initialize(url, rb);
+        Parent root = FXMLLoader.load(getClass().getResource("view/Principal.fxml"));
+        
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        //La ventana no será redimensionable
+        stage.setResizable(false);
+        stage.setTitle("Principal");
+        stage.show();
     }
 
     /**
@@ -35,5 +35,5 @@ public class Aplication extends Application{
     public static void main(String[] args) {
         launch(args);
     }
-
+    
 }

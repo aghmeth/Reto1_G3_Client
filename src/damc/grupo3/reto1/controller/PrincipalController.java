@@ -42,7 +42,6 @@ public class PrincipalController implements Initializable {
 
             //El campo de texto está deshabilitado
             lblTexto.setDisable(true);
-
             //El botón está habilitado
             btnExit.setDisable(false);
             //Con esto vamos a crear una ventana de confirmación al pulsar el botón de salir
