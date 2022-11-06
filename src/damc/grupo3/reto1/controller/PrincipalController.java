@@ -5,6 +5,7 @@
  */
 package damc.grupo3.reto1.controller;
 
+import damc.grupo3.reto1.model.User;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
@@ -66,6 +67,9 @@ public class PrincipalController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+    }
+    public void infoUser(User user){  
+        lblTexto.setText(user.getFullname() + lblTexto.getText()); 
     }
 
     public void cambiarVentana() {
