@@ -37,14 +37,20 @@ public class PrincipalController implements Initializable {
     @FXML
     private Button btnExit;
 
-    @FXML
-    private void handleExitButtonAction(ActionEvent event ) {
-        try {
-
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+            User user = new User();
             //El campo de texto está deshabilitado
             lblTexto.setDisable(true);
             //El botón está habilitado
             btnExit.setDisable(false);
+            infoUser(user);
+    }
+    
+    @FXML
+    private void handleExitButtonAction(ActionEvent event ) {
+        try {
+
             //Con esto vamos a crear una ventana de confirmación al pulsar el botón de salir
             Alert ventanita = new Alert(Alert.AlertType.CONFIRMATION);
             ventanita.setHeaderText(null);
@@ -64,12 +70,9 @@ public class PrincipalController implements Initializable {
         }
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
-    }
-    public void infoUser(User user){  
-        lblTexto.setText(user.getFullname() + lblTexto.getText()); 
+    public void infoUser(User user){
+        //Seteamos el nombre del usuario en la ventana
+        lblTexto.setText(user.getFullname() + " " +  lblTexto.getText()); 
     }
 
     public void cambiarVentana() {
