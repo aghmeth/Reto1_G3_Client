@@ -50,14 +50,16 @@ public class SignInClient implements Sign{
         try {
             mt = SIGNUP_REQUEST;
             Socket skCliente = new Socket(HOST, PUERTO);
-            oos = new ObjectOutputStream(skCliente.getOutputStream());           
+            oos = new ObjectOutputStream(skCliente.getOutputStream());
+           
             m.getMessageType();
             m.getUser();
+            System.out.println("Enviando mensaje");
             oos.writeObject(m);
             
             ois = new ObjectInputStream(skCliente.getInputStream());
             Message m2 = (Message) ois.readObject();
-
+            System.out.println("El tipo de mensaje es: " + m2.getMessageType());
             if(null != mt) switch (mt) {
                case OK_RESPONSE:
                    log(Level.SEVERE, "The user has been logged correctly");
@@ -66,6 +68,9 @@ public class SignInClient implements Sign{
                    throw new UserAlreadyExitsException("The user already exists");
                case ERROR_RESPONSE:
                    throw new ServerErrorException("An error in the server has ocurred");
+                   
+               case MAX_USER:
+                   System.out.println("Max users");
                default:
                    break;
            }
@@ -120,4 +125,6 @@ public class SignInClient implements Sign{
         }
         return user;   
     }
+    
+    
 }

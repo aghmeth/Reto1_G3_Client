@@ -11,4 +11,12 @@ package damc.grupo3.reto1.model;
  */
 public class ControllerFactory {
     
+              
+    public SignInClient getSocket() {
+        return new SignInClient();
+    }
+
+    public static void main(String[] arg) {
+       new ControllerFactory(); 
+    }
 }
