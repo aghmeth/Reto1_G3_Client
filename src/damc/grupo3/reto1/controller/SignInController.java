@@ -5,6 +5,9 @@
  */
 package damc.grupo3.reto1.controller;
 
+import damc.grupo3.reto1.model.ControllerFactory;
+import damc.grupo3.reto1.model.Sign;
+import damc.grupo3.reto1.model.User;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,7 +28,7 @@ import javafx.stage.Stage;
  *
  * @author Josu ,Jessica
  */
-public class SignInController{
+public class SignInController {
 
     @FXML
     private Stage stage;
@@ -114,23 +117,24 @@ public class SignInController{
             String password = this.txtPasswd.getText();
             if (!(PASSWORD_PATTERN.matcher(password).matches())) {
 
-                // Una vez que los campos de nombre de usuario y password
-                //son válidos. Se llama al método getExecuteSignIn de la interfaz 
-                //(Sign) pasándole un objeto (User), con los valores del nombre de usuario 
-                //y la password: 
-                // User user = Sign
-                //cargar el fxml de la ventana de sign up utilizando un cargador no estatico 
-//                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Principal.fxml"));
-//
-//                Parent root = loader.load();
-//
-//                PrincipalController principal = loader.getController();
-//
-//                principal.setUser(User);
-//                principal.initialize(location, resources);
-//                throw new Exception("CONTRASEÑA NO VALIDA");
-//           
                 throw new Exception("Contraseña incorrecta");
+            } else {
+                //ControllerFactory factory = new ControllerFactory();
+                //factory.getSocket();
+                User user = new User();
+                user.setLogin(txtNombre.getText());
+                user.setPassword(txtPasswd.getText());
+                Stage PrincipalStage = new Stage();
+                //cargar el fxml de la ventana de sign up utilizando un cargador no estatico
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/damc/grupo3/reto1/view/Principal.fxml"));
+
+                
+                Parent root = (Parent) loader.load();
+
+                PrincipalController principalController = ((PrincipalController) loader.getController());
+
+                principalController.initStage(root);
+
             }
 
         } catch (Exception e) {
@@ -146,13 +150,15 @@ public class SignInController{
     private void handleSignUpAction(ActionEvent event) {
 
         try {
+            Stage SignUpStage = new Stage();
             //cargar el fxml de la ventana de sign up utilizando un cargador no estatico
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("view/SignUp.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/damc/grupo3/reto1/view/SignUp.fxml"));
 
-            Parent root = loader.load();
+            Parent root = (Parent) loader.load();
 
-             SignUpController signUpController = loader.getController();
-             signUpController.initStage(root);
+            SignUpController signUpController = ((SignUpController) loader.getController());
+
+            signUpController.initStage(root);
         } catch (IOException ex) {
             Logger.getLogger(SignInController.class.getName()).log(Level.SEVERE, null, ex);
         }

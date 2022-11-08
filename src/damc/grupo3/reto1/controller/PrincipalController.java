@@ -5,6 +5,8 @@
  */
 package damc.grupo3.reto1.controller;
 
+import static damc.grupo3.reto1.controller.SignUpController.LOGGER;
+import damc.grupo3.reto1.model.User;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
@@ -28,16 +30,41 @@ import javafx.stage.Stage;
  *
  * @author 2dam
  */
-public class PrincipalController implements Initializable {
+public class PrincipalController {
 
-    String nombre = "Pablo";
     @FXML
     private Label lblTexto;
     @FXML
     private Button btnExit;
 
     @FXML
-    private void handleExitButtonAction(ActionEvent event ) {
+    public void initStage(Parent root) {
+
+         LOGGER.info("Initializing Principal stage.");
+         User user = new User();
+         Scene scene = new Scene(root);
+         //El campo de texto está deshabilitado
+        lblTexto.setDisable(true);
+        //El botón está habilitado
+        btnExit.setDisable(false);
+        lblTexto.setVisible(true);
+        btnExit.setVisible(true);
+        
+        infoUser(user);
+       
+       
+        Stage stage = new Stage();
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.setTitle("PRINCIPAL");
+
+        stage.show();
+      //  User user = new User();
+       
+    }
+
+    @FXML
+    private void handleExitButtonAction(ActionEvent event) {
         try {
 
             //El campo de texto está deshabilitado
@@ -63,32 +90,8 @@ public class PrincipalController implements Initializable {
             new Alert(Alert.AlertType.ERROR, e.getMessage() + ButtonType.OK).showAndWait();
         }
     }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
-    }
-
-    public void cambiarVentana() {
-
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Principal.fxml"));
-            
-            Parent root = loader.load();
-            
-            SignInController signIn = loader.getController();
-            
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            
-            stage.setScene(scene);
-            stage.show();
-            
-           
-        } catch (IOException ex) {
-            Logger.getLogger(PrincipalController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+    public void infoUser(User user){
+        lblTexto.setText(user.getLogin() + lblTexto.getText());
     }
 
 }
