@@ -5,6 +5,8 @@
  */
 package damc.grupo3.reto1.controller;
 
+import damc.grupo3.reto1.model.ControllerFactory;
+import damc.grupo3.reto1.model.User;
 import java.util.logging.Logger;
 import java.awt.event.KeyEvent;
 import java.net.URL;
@@ -146,8 +148,18 @@ public class SignUpController {
             //Si los campos de password y confirmPassword no coinciden, saldrá un label de error (lblError2) y limpia esos campos.
             if (txtPasswd2 == txtConfirmPasswd) {
                 throw new Exception("LAS PASSWORD \n NO COINCIDEN");
+            }else {
+                ControllerFactory factory = new ControllerFactory();
+                //factory.getSocket;
+                User user = new User();
+                user.setLogin(txtNombre2.getText());
+                user.setLogin(txtNombreComp.getText());
+                user.setLogin(txtEmail.getText());
+                user.setLogin(txtPasswd2.getText());
             }
 
+            
+            
             //Seguido, saldrá del método del botón.
         } catch (Exception e) {
             lblError2.setVisible(true);
