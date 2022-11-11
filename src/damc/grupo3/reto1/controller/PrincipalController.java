@@ -5,6 +5,7 @@
  */
 package damc.grupo3.reto1.controller;
 
+import static damc.grupo3.reto1.controller.SignUpController.LOGGER;
 import damc.grupo3.reto1.model.User;
 import java.io.IOException;
 import java.net.URL;
@@ -26,31 +27,61 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 /**
+ * This is the main window controller. Show a message when the session starts
  *
- * @author 2dam
+ * @author Diego y Alejandro
  */
-public class PrincipalController implements Initializable {
+public class PrincipalController {
 
-    String nombre = "Pablo";
     @FXML
     private Label lblTexto;
     @FXML
     private Button btnExit;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-            User user = new User();
-            //El campo de texto está deshabilitado
-            lblTexto.setDisable(true);
-            //El botón está habilitado
-            btnExit.setDisable(false);
-            infoUser(user);
+    private User user;
+
+    /**
+     * Method to start the window
+     *
+     * @param root the root of the window
+     * @param user object of User type
+     */
+    @FXML
+    public void initStage(Parent root, User user) {
+
+        LOGGER.info("Initializing Principal stage.");
+
+        Scene scene = new Scene(root);
+        //El campo de texto está deshabilitado
+        lblTexto.setDisable(true);
+        //El botón está habilitado
+        btnExit.setDisable(false);
+        lblTexto.setVisible(true);
+        btnExit.setVisible(true);
+
+        Stage stage = new Stage();
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.setTitle("PRINCIPAL");
+
+        stage.show();
+        lblTexto.setText(user.getLogin() + " " + lblTexto.getText());
+
     }
+
+    /**
+     * "exit" button method with confirmation
+     */
     
     @FXML
-    private void handleExitButtonAction(ActionEvent event ) {
+    private void handleExitButtonAction(ActionEvent event) {
         try {
 
+            //El campo de texto está deshabilitado
+            lblTexto.setDisable(true);
+
+            //El botón está habilitado
+            btnExit.setDisable(false);
             //Con esto vamos a crear una ventana de confirmación al pulsar el botón de salir
             Alert ventanita = new Alert(Alert.AlertType.CONFIRMATION);
             ventanita.setHeaderText(null);
@@ -70,31 +101,13 @@ public class PrincipalController implements Initializable {
         }
     }
 
-    public void infoUser(User user){
-        //Seteamos el nombre del usuario en la ventana
-        lblTexto.setText(user.getFullname() + " " +  lblTexto.getText()); 
-    }
-
-    public void cambiarVentana() {
-
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Principal.fxml"));
-            
-            Parent root = loader.load();
-            
-            //SignInController signIn = loader.getController();
-            
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            
-            stage.setScene(scene);
-            stage.show();
-            
-           
-        } catch (IOException ex) {
-            Logger.getLogger(PrincipalController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+    
+    /**
+     * 
+     * @param user object of User type
+     */
+    public void getUser(User user) {
+        this.user = user;
     }
 
 }

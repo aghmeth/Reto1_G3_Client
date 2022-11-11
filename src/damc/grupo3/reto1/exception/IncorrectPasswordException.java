@@ -9,15 +9,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Does not stablish connection with the server
+ * Incorrectly introduced password
  * @author Alejandro y Jessica
  */
-public class ServerConnectionException extends Exception{
+public class IncorrectPasswordException extends Exception {
+
+         private static final long serialVersionUID = 1L;
     
-   private static final long serialVersionUID = 1L;
-    
-    public ServerConnectionException (String message){
+    public IncorrectPasswordException (String message){
         super(message);
            
     } 
+           
 }

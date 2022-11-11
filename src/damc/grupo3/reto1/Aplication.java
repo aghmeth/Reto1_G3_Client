@@ -1,32 +1,31 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package damc.grupo3.reto1;
 
+
+
+import damc.grupo3.reto1.controller.SignInController;
 import javafx.application.Application;
+import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
- *
- * @author Diego
+ * This is the Application class for the client side.
+ * @author Josu y Jessica
  */
-public class Aplication extends Application {
+public class Aplication extends Application{
     
-    @Override
+ /**
+ * This method is used to start the app
+ *@param stage is the scenary
+ */
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("view/Principal.fxml"));
         
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        //La ventana no será redimensionable
-        stage.setResizable(false);
-        stage.setTitle("Principal");
-        stage.show();
+        FXMLLoader loader= new FXMLLoader(getClass().getResource("view/SignIn.fxml")); 
+        Parent root = (Parent)loader.load();
+        SignInController signIn= ((SignInController)loader.getController());
+        signIn.setStage(stage);
+        signIn.initStage(root);
     }
 
     /**
@@ -34,6 +33,5 @@ public class Aplication extends Application {
      */
     public static void main(String[] args) {
         launch(args);
-    }
-    
+    }    
 }

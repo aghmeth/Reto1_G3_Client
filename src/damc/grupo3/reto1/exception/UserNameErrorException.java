@@ -9,14 +9,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Does not stablish connection with the server
+ * Data entered in the user field is wrong
  * @author Alejandro y Jessica
+ * 
  */
-public class ServerConnectionException extends Exception{
+public class UserNameErrorException extends Exception{
+ 
+        private static final long serialVersionUID = 1L;
     
-   private static final long serialVersionUID = 1L;
-    
-    public ServerConnectionException (String message){
+    public UserNameErrorException (String message){
         super(message);
            
     } 

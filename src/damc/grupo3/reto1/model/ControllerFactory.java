@@ -5,19 +5,21 @@
  */
 package damc.grupo3.reto1.model;
 
-
-
 /**
- *
+ * Instantiate the interface methods that run on 'SignInClient' to the Controller
  * @author Diego
  */
-public class ControllerFactory{
-    //Este método tiene que invocarse en los controlladores de SignIn y SignUp
-    //Con este método creamos el método getSocket, el cual llama al SignInClient
-       public SignInClient getSocket(){
-           return new SignInClient();
+public class ControllerFactory {
+
+    /**
+     * Con este método creamos el método getSocket, el cual llama al
+     * SignInClient y recoge los métodos que hay en este (dependiendo de cual
+     * sea llamado en las ventanas correspondientes
+     * @return sign
+     */
+    public Sign getSocket() {
+        Sign sign;
+        sign = new SignInClient();
+        return sign;
     }
-       
-       
-       
 }
