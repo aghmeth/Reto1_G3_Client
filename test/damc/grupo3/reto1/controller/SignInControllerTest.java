@@ -11,7 +11,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
@@ -92,7 +91,7 @@ public class SignInControllerTest extends ApplicationTest {
     public void test4_ComprobarCamporobarPasswordVacio() {
 
         clickOn(txtNombre);
-        eraseText(4);
+        txtNombre.clear();
         clickOn(txtPasswd);
         write("qwer");
         clickOn(btnLogin);
@@ -104,7 +103,7 @@ public class SignInControllerTest extends ApplicationTest {
     public void test5_ComprobarCarecteresNombre() {
 
         clickOn(txtPasswd);
-        eraseText(4);
+        txtPasswd.clear();
 
         clickOn(txtNombre);
         write("qwertyuiopasdfgh");
@@ -121,12 +120,12 @@ public class SignInControllerTest extends ApplicationTest {
     public void test6_ComprobarCarecteresPasswd() {
 
         clickOn(txtPasswd);
-        eraseText(4);
+        txtPasswd.clear();
         write("qwertyuiopasdfgh");
 
         clickOn(txtNombre);
-        eraseText(16);
-        write("Ioritz");
+        txtNombre.clear();
+        write("david");
 
         clickOn(btnLogin);
         verifyThat(lblError, LabeledMatchers.hasText("NUMERO CARACTERES \n INCORRECTOS"));
@@ -137,7 +136,7 @@ public class SignInControllerTest extends ApplicationTest {
     public void test7_ComprobarIncorrectPasswd() {
 
         clickOn(txtPasswd);
-        eraseText(16);
+        txtPasswd.clear();
         write("manolo");
 
         clickOn(btnLogin);
@@ -145,15 +144,26 @@ public class SignInControllerTest extends ApplicationTest {
 
     }
 
+    
+
     @Test
-    public void test7_ComprobarTodoCorrecto() {
+    public void test8_ComprobarTodoCorrecto() {
 
         clickOn(txtPasswd);
-        eraseText(6);
-        write("Man1");
-
+        txtPasswd.clear();
+        write("Abcd*1234");
+        
+        clickOn(txtNombre);
+        txtNombre.clear();
+        write("david");
+        
         clickOn(btnLogin);
+        verifyThat("#idPane", isVisible());
+        
+        
+
     }
     
+
 
 }
