@@ -121,6 +121,9 @@ public class SignUpController {
 
         //El título de la ventana es “Sign Up”.
         stage.setTitle("SIGN UP");
+        
+        lblError2.setVisible(true);
+        lblError2.setText("Bienvenido");
 
         stage.show();
 
@@ -149,8 +152,9 @@ public class SignUpController {
             }
 
             //Validar que el máximo número de caracteres en el campo de nombre de usuario, fullname, password y confirmPassword sea de 15.     
-            if (this.txtNombre2.getText().length() > 15 || this.txtNombreComp.getText().length() > 15 || this.txtPasswd2.getText().length() > 15
-                    || this.txtConfirmPasswd.getText().length() > 15) {
+            if ((this.txtNombre2.getText().length() > 15 || this.txtNombreComp.getText().length() > 15 || this.txtPasswd2.getText().length() > 15
+                    || this.txtConfirmPasswd.getText().length() > 15) || (this.txtNombre2.getText().length() < 3 || this.txtNombreComp.getText().length() < 3
+                    || this.txtPasswd2.getText().length() < 3 || this.txtConfirmPasswd.getText().length() < 3)) {
                 throw new Exception("NUMERO CARACTERES \n INCORRECTOS");
             }
 

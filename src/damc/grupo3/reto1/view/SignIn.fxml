@@ -49,7 +49,7 @@
                 <Tooltip text="El password tiene que tener 15 caracteres &#10;como máximo, debe de tener mayusculas y minusculas y números." />
             </tooltip>
         </PasswordField>
-        <Button fx:id="btnSignUp" layoutX="485.0" layoutY="440.0" mnemonicParsing="false" onAction="#handleSignUpAction" prefHeight="48.0" prefWidth="149.0" text="SIGN UP">
+        <Button fx:id="btnSignUp" layoutX="485.0" layoutY="440.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="149.0" text="SIGN UP">
             <font>
                 <Font name="System Bold" size="12.0" />
             </font>

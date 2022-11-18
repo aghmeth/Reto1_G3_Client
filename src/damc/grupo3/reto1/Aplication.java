@@ -2,6 +2,7 @@ package damc.grupo3.reto1;
 
 
 
+import damc.grupo3.reto1.controller.ControlDePractica;
 import damc.grupo3.reto1.controller.SignInController;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
@@ -23,9 +24,10 @@ public class Aplication extends Application{
         
         FXMLLoader loader= new FXMLLoader(getClass().getResource("view/SignIn.fxml")); 
         Parent root = (Parent)loader.load();
-        SignInController signIn= ((SignInController)loader.getController());
-        signIn.setStage(stage);
-        signIn.initStage(root);
+        SignInController cdp = ((SignInController)loader.getController());
+        
+        cdp.setStage(stage);
+        cdp.initStage(root);
     }
 
     /**

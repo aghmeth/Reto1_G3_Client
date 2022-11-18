@@ -85,6 +85,7 @@ public class SignInController {
 
         //El botón SignUp (btnSignUp) está habilitado. 
         btnSignUp.setDisable(false);
+        btnSignUp.setOnAction(this::handleSignUpAction);
 
         //Los label de nombre de usuario (lblNombre) y password (lblPasswd) son visibles.
         lblNombre.setDisable(false);
