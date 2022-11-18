@@ -91,28 +91,41 @@ public class SignUpControllerTest extends ApplicationTest {
     public void test3_CaracteresIncorrectos() {
 
         clickOn(txtNombreComp);
-        write("QWERTYUIOPASDFGH");
-
+        write("JuanAYAYAYAYAYAYA");
         clickOn(txtNombre2);
-        write("juan");
+        write("Juan");
         clickOn(txtPasswd2);
         write("Man1");
         clickOn(txtConfirmPasswd);
         write("Man1");
         clickOn(txtEmail);
         write("juan@gmail.com");
-        clickOn(txtConfirmPasswd);
-
         clickOn(btnSave);
-        verifyThat(lblError2, LabeledMatchers.hasText("NUMERO CARACTERES \n INCORRECTOS"));
+        verifyThat(lblError2, LabeledMatchers.hasText("NUMERO CARACTERES INCORRECTOS"));
+
+    }
+    
+    @Test
+    public void test4_CaracteresNombreIncorrectos() {
+
+        clickOn(txtNombreComp);
+        eraseText(17);
+        write("Juan");
+        clickOn(txtNombre2);
+        write("JuanAYAYAYAYAYAYA");
+        clickOn(btnSave);
+        verifyThat(lblError2, LabeledMatchers.hasText("NOMBRE DE USUARIO\n INCORRECTO"));
 
     }
 
     @Test
-    public void test4_EmailIncorrectos() {
+    public void test5_EmailIncorrectos() {
+        clickOn(txtNombre2);
+        eraseText(17);
+        write("Juan");
 
         clickOn(txtNombreComp);
-        eraseText(16);
+        eraseText(4);
         write("jessica");
 
         clickOn(txtEmail);
@@ -125,11 +138,11 @@ public class SignUpControllerTest extends ApplicationTest {
     }
 
     @Test
-    public void test5_ConrtraseñaIncorrecta() {
+    public void test6_ConrtraseñaIncorrecta() {
 
         clickOn(txtEmail);
         eraseText(14);
-        write("juan@gmail.com");
+        write("jessica@gmail.com");
 
         clickOn(txtPasswd2);
         eraseText(4);
@@ -144,30 +157,19 @@ public class SignUpControllerTest extends ApplicationTest {
 
     }
 
-    /*@Test
-    public void test6_ConrtraseñaNoCoincide() {
+    @Test
+    public void test7_EcribirBienDatos() {
 
+        clickOn(txtConfirmPasswd);
+        eraseText(4);
+        write("Man*1");
+        
         clickOn(txtPasswd2);
         eraseText(4);
-        write("Man1");
-
-        clickOn(txtConfirmPasswd);
-        eraseText(4);
-        write("Mann1");
-
+        write("Man*1");
+        
         clickOn(btnSave);
-        verifyThat(lblError2, LabeledMatchers.hasText("LAS PASSWORD \n NO COINCIDEN"));
-
-    }*/
-
-    @Test
-    public void test7_TodoCorrecto() {
-
-        clickOn(txtConfirmPasswd);
-        eraseText(4);
-        write("Man1");
-
-        clickOn(btnSave);
+        clickOn("Aceptar");
 
     }
 }

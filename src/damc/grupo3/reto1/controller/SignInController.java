@@ -173,6 +173,9 @@ public class SignInController {
     private void handleSignUpAction(ActionEvent event) {
 
         try {
+            txtNombre.setText("");
+            txtPasswd.setText("");
+            
             Stage SignUpStage = new Stage();
             //cargar el fxml de la ventana de sign up utilizando un cargador no estatico
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/damc/grupo3/reto1/view/SignUp.fxml"));

@@ -5,6 +5,9 @@
  */
 package damc.grupo3.reto1.controller;
 
+import damc.grupo3.reto1.exception.IncorrectPasswordException;
+import damc.grupo3.reto1.exception.ServerConnectionException;
+import damc.grupo3.reto1.exception.UserNameErrorException;
 import damc.grupo3.reto1.model.ControllerFactory;
 import damc.grupo3.reto1.model.Sign;
 import damc.grupo3.reto1.model.User;
@@ -14,6 +17,7 @@ import java.net.URL;
 import static java.time.Instant.now;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -75,6 +79,7 @@ public class SignUpController {
 
     //Declaramos la interfaz
     private Sign interf;
+    private String IncorrectPasswordException;
 
     /**
      * Method to initialize the window
@@ -95,7 +100,6 @@ public class SignUpController {
 
         //El botón save está habilitado.
         btnSave.setDisable(false);
-        btnSave.setOnAction(this::handleButtonSaveAction);
 
         //El botón cancel está habilitado. 
         btnCancel.setDisable(false);
@@ -140,7 +144,7 @@ public class SignUpController {
     
     @FXML
     //VALIDAR QUE TODO ESTE CORRECTO Y CUMPLA LOS REQUISITOS
-    private void handleButtonSaveAction(ActionEvent event) {
+    private void handleButtonSaveAction(ActionEvent event) throws IncorrectPasswordException, UserNameErrorException {
 
         //Validar que los campos nombre de usuario, fullname, email, password y confirmPasswd estén informados.
         try {
@@ -152,10 +156,14 @@ public class SignUpController {
             }
 
             //Validar que el máximo número de caracteres en el campo de nombre de usuario, fullname, password y confirmPassword sea de 15.     
-            if ((this.txtNombre2.getText().length() > 15 || this.txtNombreComp.getText().length() > 15 || this.txtPasswd2.getText().length() > 15
-                    || this.txtConfirmPasswd.getText().length() > 15) || (this.txtNombre2.getText().length() < 3 || this.txtNombreComp.getText().length() < 3
+            if ((this.txtNombreComp.getText().length() > 15 || this.txtPasswd2.getText().length() > 15
+                    || this.txtConfirmPasswd.getText().length() > 15) || (this.txtNombreComp.getText().length() < 3
                     || this.txtPasswd2.getText().length() < 3 || this.txtConfirmPasswd.getText().length() < 3)) {
-                throw new Exception("NUMERO CARACTERES \n INCORRECTOS");
+                throw new Exception("NUMERO CARACTERES INCORRECTOS");
+            }
+            
+            if (this.txtNombre2.getText().length() > 15 || this.txtNombre2.getText().length() < 3) {
+                throw new UserNameErrorException("NOMBRE DE USUARIO\n INCORRECTO");
             }
 
             //Validar que el email tenga formato específico (xxxxx@gmail.com) y que no supere los 30 caracteres (ESPECIFICAMOS EL FORMATO ARRIBA).
@@ -172,8 +180,10 @@ public class SignUpController {
             }
 
             //Si los campos de password y confirmPassword no coinciden, saldrá un label de error (lblError2) y limpia esos campos.
-            if (!(txtPasswd2 != txtConfirmPasswd)) {
-                throw new Exception("LAS PASSWORD \n NO COINCIDEN");
+            if (!(txtPasswd2.getText().equals(txtConfirmPasswd.getText()))) {
+                throw new IncorrectPasswordException("LAS CONTRASEÑAS\n NO COINCIDEN");
+                
+            
                
                 //throw new Exception("usuario registrado");
             } else {
@@ -184,9 +194,15 @@ public class SignUpController {
                 user.setEmail(txtEmail.getText());
                 user.setPassword(txtPasswd2.getText());
                 user.setLastPasswordChange(Date.from(now()));
-                interf.getExecuteSignUp(user);
                 
-                throw new Exception("USUARIO REGISTRADO");
+                Alert ventanita = new Alert(Alert.AlertType.INFORMATION);
+                ventanita.setHeaderText(null);
+                ventanita.setTitle("INFORMACIÓN");
+                ventanita.setContentText("EL USUARIO SE HA REGISTRADO CORRECTAMENTE");
+                Optional<ButtonType> action = ventanita.showAndWait();
+                
+                cerrarVentana();
+                interf.getExecuteSignUp(user);
 
             }
 
@@ -195,7 +211,7 @@ public class SignUpController {
 
             lblError2.setVisible(true);
             lblError2.setText(e.getMessage());
-        }
+        } 
 
     }
 
@@ -216,4 +232,8 @@ public class SignUpController {
 
     }
 
+    private void cerrarVentana() {
+     Stage stage = (Stage) this.btnSave.getScene().getWindow();
+     stage.close();
+    }
 }
